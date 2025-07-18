@@ -1,0 +1,128 @@
+/* Reset and base styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
+
+body {
+  background-color: #f0f4f8;
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+  min-height: 100vh;
+}
+
+/* Main container */
+.app-container {
+  background: white;
+  max-width: 900px;
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  padding: 30px 40px;
+}
+
+/* Title */
+h1 {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 30px;
+  font-weight: 700;
+  letter-spacing: 1.1px;
+}
+
+/* Search input */
+.search-input {
+  width: 100%;
+  padding: 14px 20px;
+  font-size: 16px;
+  border: 2px solid #1e2a78;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+  margin-bottom: 10px;
+
+  /* White text on dark background */
+  color: white;
+  background-color: #1e2a78;
+}
+
+.search-input::placeholder {
+  color: #cbd5e1; /* lighter placeholder text */
+}
+
+.search-input:focus {
+  border-color: #4a63f8;
+  box-shadow: 0 0 8px rgba(74, 99, 248, 0.8);
+  background-color: #263f99; /* slightly lighter on focus */
+  color: white;
+}
+
+/* Status messages */
+.status-message {
+  text-align: center;
+  font-size: 18px;
+  color: #555;
+  font-style: italic;
+  margin-bottom: 20px;
+}
+
+/* Grid container for countries */
+.country-list {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 20px;
+}
+
+/* Country card */
+.country-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #ecf0f1;
+  border-radius: 10px;
+  padding: 15px 10px;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+  transition: transform 0.2s ease;
+  cursor: default;
+  text-align: center;
+}
+
+.country-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(52, 152, 219, 0.3);
+}
+
+/* Flag image */
+.country-flag {
+  width: 80px;
+  height: 50px;
+  object-fit: contain;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* Country name */
+.country-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: #2c3e50;
+  user-select: none;
+}
+
+/* Responsive: fewer columns on smaller screens */
+@media (max-width: 900px) {
+  .country-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .country-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
