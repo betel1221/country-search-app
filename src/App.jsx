@@ -28,7 +28,7 @@ function App() {
   );
 
   if (selectedCountry) {
-    // Detailed view
+    
     return (
       <div className="app-container">
         <button onClick={() => setSelectedCountry(null)} className="back-button">
@@ -46,7 +46,7 @@ function App() {
     );
   }
 
-  // List view
+ 
   return (
     <div className="app-container">
       <h1>Country Search</h1>
