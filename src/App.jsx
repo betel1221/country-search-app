@@ -5,6 +5,7 @@ function App() {
   const [countries, setCountries] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [loading, setLoading] = useState(true);
+  const [selectedCountry, setSelectedCountry] = useState(null);
 
   useEffect(() => {
     async function fetchCountries() {
@@ -19,7 +20,6 @@ function App() {
         setLoading(false);
       }
     }
-
     fetchCountries();
   }, []);
 
@@ -27,9 +27,30 @@ function App() {
     country.name.common.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  if (selectedCountry) {
+    // Detailed view
+    return (
+      <div className="app-container">
+        <button onClick={() => setSelectedCountry(null)} className="back-button">
+          ← Back
+        </button>
+        <h2>{selectedCountry.name.official}</h2>
+        <img
+          src={selectedCountry.flags?.png}
+          alt={`Flag of ${selectedCountry.name.common}`}
+          className="country-flag"
+        />
+        <p><strong>Region:</strong> {selectedCountry.region}</p>
+        <p><strong>Population:</strong> {selectedCountry.population.toLocaleString()}</p>
+      </div>
+    );
+  }
+
+  // List view
   return (
     <div className="app-container">
       <h1>Country Search</h1>
+
       <input
         type="text"
         placeholder="Search countries..."
@@ -37,6 +58,7 @@ function App() {
         onChange={(e) => setSearchTerm(e.target.value)}
         className="search-input"
       />
+
       {loading ? (
         <p className="status-message">Loading countries...</p>
       ) : filtered.length === 0 ? (
@@ -44,7 +66,12 @@ function App() {
       ) : (
         <div className="country-list">
           {filtered.map((country) => (
-            <div key={country.name.common} className="country-card">
+            <div
+              key={country.name.common}
+              className="country-card"
+              onClick={() => setSelectedCountry(country)}
+              style={{ cursor: 'pointer' }}
+            >
               <img
                 src={country.flags?.png}
                 alt={country.name.common}
