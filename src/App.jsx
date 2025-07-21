@@ -7,22 +7,21 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-  async function fetchCountries() {
-    try {
-      const res = await fetch('https://restcountries.com/v3.1/independent?status=true');
-      const data = await res.json();
-      setCountries(data);
-    } catch (error) {
-      console.error('Error fetching countries:', error);
-      setCountries([]); // optional fallback
-    } finally {
-      setLoading(false);
+    async function fetchCountries() {
+      try {
+        const res = await fetch('https://restcountries.com/v3.1/independent?status=true');
+        const data = await res.json();
+        setCountries(data);
+      } catch (error) {
+        console.error('Error fetching countries:', error);
+        setCountries([]);
+      } finally {
+        setLoading(false);
+      }
     }
-  }
 
-  fetchCountries();
-}, []);
-  
+    fetchCountries();
+  }, []);
 
   const filtered = countries.filter((country) =>
     country.name.common.toLowerCase().includes(searchTerm.toLowerCase())
@@ -31,7 +30,6 @@ function App() {
   return (
     <div className="app-container">
       <h1>Country Search</h1>
-
       <input
         type="text"
         placeholder="Search countries..."
@@ -39,7 +37,6 @@ function App() {
         onChange={(e) => setSearchTerm(e.target.value)}
         className="search-input"
       />
-
       {loading ? (
         <p className="status-message">Loading countries...</p>
       ) : filtered.length === 0 ? (
